@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -20,6 +20,14 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
+    - name: Grant execute permission for mvnw
+      run: chmod +x mvnw
+
+    - name: Ensure mvnw exists and has permission
+      run: |
+        ls -l mvnw
+        cat mvnw
 
     - name: Build with Maven
       run: ./mvnw -B package --file pom.xml
